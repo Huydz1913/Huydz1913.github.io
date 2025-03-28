@@ -156,3 +156,61 @@
         </div>
         <script src="./script.js"></script>
     </body>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hiệu ứng Rơi Vật Thể Tùy Chỉnh</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #222;
+        }
+
+        .falling-object {
+            position: absolute;
+            top: -50px; /* Bắt đầu từ trên */
+            width: 50px; /* Điều chỉnh kích thước */
+            height: 50px; /* Điều chỉnh kích thước */
+            animation: fall 5s linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(100vh); /* Rơi hết màn hình */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+        const objects = ['R.png','R.png']; // Link hình ảnh tùy chỉnh
+
+        function createFallingObject() {
+            const object = document.createElement('img');
+            const randomObject = objects[Math.floor(Math.random() * objects.length)];
+            object.src = randomObject;
+            object.classList.add('falling-object');
+            object.style.left = ${Math.random() * window.innerWidth}px; // Vị trí ngẫu nhiên theo chiều ngang
+            object.style.animationDuration = ${Math.random() * 3 + 2}s; // Thời gian rơi ngẫu nhiên từ 2 đến 5 giây
+
+            document.body.appendChild(object);
+
+            // Sau khi vật thể rơi hết màn hình, xóa nó đi để tránh làm đầy bộ nhớ
+            setTimeout(() => {
+                object.remove();
+            }, 5000); // Sau 5 giây, xóa vật thể
+        }
+
+        // Tạo các vật thể rơi mỗi 500ms
+        setInterval(createFallingObject, 500);
+    </script>
+
+</body>
+</html>
